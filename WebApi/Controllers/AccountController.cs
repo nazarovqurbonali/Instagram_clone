@@ -14,7 +14,7 @@ public class AccountController(IAccountService service) : BaseController
 {
     [HttpPost("register")]
     [AllowAnonymous]
-    public async Task<IActionResult> Register([FromBody]RegisterDto model)
+    public async Task<IActionResult> Register([FromForm]RegisterDto model)
     {
         if (ModelState.IsValid)
         {
@@ -46,7 +46,7 @@ public class AccountController(IAccountService service) : BaseController
     
     [HttpDelete("ForgotPassword")]
     [AllowAnonymous]
-    public async Task<Response<string>> ForgotPassword(ForgotPasswordDto forgotPasswordDto)
+    public async Task<Response<string>> ForgotPassword([FromBody]ForgotPasswordDto forgotPasswordDto)
     {
         return await service.ForgotPasswordTokenGenerator(forgotPasswordDto);
     }
@@ -54,14 +54,14 @@ public class AccountController(IAccountService service) : BaseController
       
     [HttpDelete("ResetPassword")]
     [AllowAnonymous]
-    public async Task<Response<string>> ResetPassword(ResetPasswordDto resetPasswordDto)
+    public async Task<Response<string>> ResetPassword([FromBody]ResetPasswordDto resetPasswordDto)
     {
         return await service.ResetPassword(resetPasswordDto);
     }
     
     [HttpPut("ChangePassword")]
     [AllowAnonymous]
-    public async Task<Response<string>> ChangePassword(ChangePasswordDto changePasswordDto)
+    public async Task<Response<string>> ChangePassword([FromBody]ChangePasswordDto changePasswordDto)
     {
         var userId = User.Claims.FirstOrDefault(c => c.Type == "sid")!.Value;
         return await service.ChangePassword(changePasswordDto,userId!);

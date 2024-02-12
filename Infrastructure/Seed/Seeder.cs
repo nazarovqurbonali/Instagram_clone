@@ -49,18 +49,18 @@ public class Seeder(DataContext context, UserManager<IdentityUser> userManager, 
         var identity = new User()
         {
             UserName = "admin",
-            PhoneNumber = "+992005442641",
+            PhoneNumber = "+992007992757",
             Email = "admin@gmail.com",
             DateRegistred = DateTime.UtcNow,
         };
-        await userManager.CreateAsync(identity, "hello123");
+        await userManager.CreateAsync(identity, "admin2024");
         await userManager.AddToRoleAsync(identity, Roles.Admin);
 
         var profileAdmin = new UserProfile()
         {
             UserId = identity.Id,
-            FirstName = "Shodmon",
-            LastName = "Inoyatzoda",
+            FirstName = "Qurbonali",
+            LastName = "Nazarov",
             Occupation = string.Empty,
             DateUpdated = DateTime.UtcNow,
             LocationId = 1,

@@ -1,13 +1,11 @@
-﻿using Domain.Dtos;
-using Domain.Dtos.EmailDto;
+﻿using Domain.Dtos.EmailDto;
 using Domain.Dtos.MessagesDto;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using MimeKit;
 using MimeKit.Text;
 
-
-namespace Infrastructure.Services;
+namespace Infrastructure.Services.Email;
 
 public class EmailService : IEmailService
 {
@@ -49,11 +47,6 @@ public class EmailService : IEmailService
                 client.Authenticate(_configuration.UserName, _configuration.Password);
 
                 client.Send(mailMessage);
-            }
-            catch
-            {
-                //log an error message or throw an exception or both.
-                throw;
             }
             finally
             {

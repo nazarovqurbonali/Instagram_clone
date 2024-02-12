@@ -163,18 +163,18 @@ public class AccountService(IConfiguration configuration,
         {
             var user = await userManager.FindByEmailAsync(resetPasswordDto.Email);
             if (user == null)
-                return new Response<string>(HttpStatusCode.BadRequest, "user not found");
+                return new Response<string>(HttpStatusCode.BadRequest, "User not found");
 
             var resetPassResult =
                 await userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);
             if (resetPassResult.Succeeded)
-                return new Response<string>(HttpStatusCode.OK, "success");
+                return new Response<string>(HttpStatusCode.OK, "Successfully reset password");
 
             return new Response<string>(HttpStatusCode.BadRequest, "please try again");
         }
         catch (Exception e)
         {
-            return new Response<string>(HttpStatusCode.BadRequest, e.Message);
+            return new Response<string>(HttpStatusCode.InternalServerError, e.Message);
         }
     }
 }
